@@ -1,0 +1,651 @@
+/*********************************************
+ * Adobe Logo
+ *********************************************/
+
+body:after {
+    content: url(../assets/images/logo.svg);
+    width: 74px;
+    height: 126px;
+    position: fixed;
+    top: 0px;
+    right: 2em;
+}
+
+/*********************************************
+ * Code Highlight
+ *********************************************/
+
+pre code {
+    font-size: 24px;
+    line-height: 30px;
+    font-family: 'Ubuntu Mono', courier, monospace;
+}
+
+/*********************************************
+ * About
+ *********************************************/
+
+ .about {
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.2em;
+ }
+
+ .about p {
+    margin-bottom: 1em;
+ }
+
+.slomo .about a {
+    color: #2E0D23;
+}
+
+.bio_info li {
+    font-size: 1em;
+}
+
+/*********************************************
+ * Bio
+ *********************************************/
+
+ #bio {
+    -webkit-column-count: 2;
+    -webkit-column-gap: 15%;
+    line-height: normal;
+ }
+
+ #bio .filler {
+  background: url(../assets/images/biz-logo.svg) no-repeat;
+  float: left;
+  width: 30px;
+  height: 38px;
+  margin-left: 100px;
+}
+
+#bio ul {
+    list-style: none;
+    text-align: right;
+}
+
+.bio_info li {
+    margin-top: 0.1em;
+}
+
+
+ #bio a {
+    color: #586e75;
+    font-size: 20px;
+ }
+
+ #bio .photo {
+    border: 10px solid #white;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+    margin-top: 30px;
+    -webkit-transform2: rotateZ(-5deg);
+    float: right;
+    margin-right: 70px;
+ }
+
+ #bio .name {
+    text-transform: capitalize;
+    color: #2E0D23;
+    font-weight: bold;
+    text-align: left;
+    margin-left: 100px;
+ }
+
+ #bio .position {
+    color: #586e75;
+    font-size: 20px;
+    text-align: left;
+    margin-left: 100px;
+ }
+
+ #bio .team {
+    color: #586e75;
+    font-size: 20px;
+    text-align: left;
+    margin-left: 100px;
+ }
+
+/*********************************************
+ * FlipBook shaders
+ *********************************************/
+
+#agenda_parent {
+
+}
+
+.inside_shader, .outside_shader {
+    position: absolute;
+    top: 0px;
+    -webkit-transition: -webkit-filter linear 0.4s;
+    -webkit-box-shadow: 0 0 10px 2px #000;
+}
+
+#outside {
+    -webkit-box-shadow: 0 0 10px 2px #000;
+}
+
+.inside_shader {
+    width: 100%;
+    height: 100%;
+    -webkit-filter: custom(url(../assets/shaders/flip_pages.vs) url(../assets/shaders/flip_pages.fs), 1 50 border-box detached,
+                            page1Transform rotateY(179deg),
+                            page1Depth -100,
+                            page2Transform rotateY(0deg),
+                            page2Depth 100,
+                            frontColor 1,
+                            backColor 0);
+}
+
+#outside, #inside {
+    padding:20px 20px 30px;
+    border: 6px solid hsl(18, 80%, 32%);
+    border-radius: 10px;
+    background: white;
+}
+
+#agenda_parent.flip-page .inside_shader {
+    -webkit-filter: custom(url(../assets/shaders/flip_pages.vs) url(../assets/shaders/flip_pages.fs), 1 50 border-box detached,
+                            page1Transform rotateY(0deg),
+                            page1Depth 100,
+                            page2Transform rotateY(0deg),
+                            page2Depth 100,
+                            frontColor 1,
+                            backColor 0);
+}
+
+.outside_shader {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    -webkit-filter: custom(url(../assets/shaders/flip_pages.vs) url(../assets/shaders/flip_pages.fs), 1 50 border-box detached,
+                            page1Transform rotateY(0deg),
+                            page1Depth 100,
+                            page2Transform rotateY(0deg),
+                            page2Depth 100,
+                            frontColor 1,
+                            backColor 0);
+}
+
+#agenda_parent.flip-page .outside_shader {
+    -webkit-filter: custom(url(../assets/shaders/flip_pages.vs) url(../assets/shaders/flip_pages.fs), 1 50 border-box detached,
+                            page1Transform rotateY(0deg),
+                            page1Depth 100,
+                            page2Transform rotateY(-180deg),
+                            page2Depth -100,
+                            frontColor 1,
+                            backColor 0);
+}
+
+/*********************************************
+ * Filtered images
+ *********************************************/
+
+.tv-frame {
+    border: 0.25em solid white;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.25);
+    bor-bottom: 20px;
+}
+
+.tv {
+  position: relative;
+  width: 120px;
+  height: 80px;
+  background-image: url(../assets/images/bridge.jpg);
+  background-size: 120px 90px;
+  color: white;
+  text-align: center;
+  text-indent: .1em;
+}
+
+.grayscale { -webkit-filter: grayscale(1.0); }
+.sepia {-webkit-filter:sepia(0.8)}
+.invert {-webkit-filter:invert(0.8)}
+.saturate {-webkit-filter:saturate(0.5)}
+.brightness {-webkit-filter:brightness(0.5)}
+.opacity {-webkit-filter:opacity(0.5)}
+.blur {-webkit-filter:blur(5px)}
+.contrast {-webkit-filter:contrast(0.5)}
+.hue-rotate {-webkit-filter:hue-rotate(90deg)}
+
+.brightness-special { -webkit-filter:brightness(0.0)}
+.invert-special { -webkit-filter:invert(0.0)}
+
+ul.polaroids li div {
+  width: 120px;
+  height: 80px;
+  background-image: url(../assets/images/bridge.jpg);
+  background-size: 120px 90px;
+  -webkit-transition: -webkit-filter 1s ease-in;    
+}
+
+ul.polaroids li {
+    display: inline;
+    float: left;
+    background: #FDF6E3;
+    margin: 0 0 27px 30px;
+    padding: 10px 10px 15px;
+    list-style: none outside;
+    font-size: 14px;
+    text-align: center;
+    color: #FDF6E3;
+    font-weight: bold;
+    -webkit-transition: color 0.5s ease-in; 
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+}
+
+ul.polaroids li.show-text {
+    color: #657B83;
+}
+
+ul.polaroids li:after{
+    content: attr(title);
+}
+
+/*********************************************
+ * SVG images
+ *********************************************/
+
+.svg-polaroid {
+    background: #FDF6E3;
+    padding: 10px 10px 15px;
+    margin: 0 0 27px 30px;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+}
+
+#emboss {
+    border: 10px solid white;
+    padding: 0px;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+}
+
+
+/*********************************************
+ * Composited images
+ *********************************************/
+ .composite img {
+    position: absolute;
+    margin: auto;
+    top: 0px; left: 15%;
+    width: 600px;
+    height: 400px;
+    display: block;
+ }
+
+ #composite_img:hover {
+    padding-left: 110px;
+    padding-top: 50px;
+ }
+ 
+ #alpha_wrapper {
+    margin-top: 1em;
+    margin-left:auto; 
+    margin-right: auto;
+    position:relative;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+    border-radius: 10px;
+ }
+
+ .isolate {
+    -webkit-isolation: isolate;
+ }
+
+ #alpha_wrapper img {
+    margin: auto;
+    top: 0px; left: 15%;
+    width: 300px;
+    height: 200px;
+    display: block-inline;
+ }
+
+ #alpha-src, #blend-src {
+    position: absolute;
+    height: 100px;
+    top: 60px;
+    left: 100px;
+    right: 100px;
+    border: 0px solid white;
+    background-color: #d33682;
+    background-image: linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,0,0,0.29) 100%);
+    opacity: 0.8;
+}
+
+
+ .blurred {
+    -webkit-filter: blur(3px);
+    -webkit-blend-mode: lighten;
+ }
+
+/*********************************************
+ * CSS Shaders
+ *********************************************/ 
+
+.wobble {
+  -webkit-filter: custom(url(../assets/shaders/wobble.vs), 40 40 content-box, amplitude 60, amount 0.5, angle 20);   
+}
+
+.wobble-color {
+  -webkit-filter: custom(url(../assets/shaders/wobble.vs) url(../assets/shaders/color-swipe.fs), 40 40 content-box, amplitude 60, amount 0.5, angle 20);   
+}
+
+.grid-bg {
+    background: url(../assets/images/grid.png);
+}
+
+/* Centering trick from http://css-tricks.com/centering-in-the-unknown/ */
+.shader-grid {
+    margin: auto;
+    margin-top: 50px;
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    background-color: white;
+}
+
+/* The ghost, nudged to maintain perfect centering */
+.shader-grid:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+.shader-box {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 25px;
+    -webkit-border-radius: 30px;
+    font-size: 13px;
+    border: 1px solid #859900;
+    color: black;
+    width: 150px;
+    height: 150px;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: justify;
+    background-color: rgba(108, 113, 196, 0.5);
+}
+
+.slomo .shader-box h1 {
+    font-size: 20px;
+    margin: 15px 0;
+    color: #268bd2;
+    font-family: 'Myriad Pro', sans-serif;
+    font-weight: bold;
+    text-transform: none;
+    text-shadow: none;
+    text-align: center;
+}
+
+.shader-box p {
+    margin: 5px;
+    text-align: justify;
+}
+
+.insetText {
+    font-weight: bold;
+    background-color: hsl(18, 80%, 32%);
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow2: hsla(18, 80%, 44%, 0.5) 0px 3px 3px;
+    margin: 10px;
+}
+
+#vertex-info {
+    float:right;
+    margin-top: 100px;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+
+}
+
+.shader_container {
+    border: 10px solid white;
+}
+
+.shader-info {
+    border-radius: 10px;
+    border: 10px solid rgba(255,237,191,0.5);
+    background: -webkit-radial-gradient(center, circle cover,  rgba(255,237,191,0.8) 0%,rgba(208, 191, 163,0.8) 100%);
+}
+
+/****
+ * Attributions
+ */
+
+.reveal .icon-list li {
+  float: left;
+  display: block;
+  width: 3em;
+  font-weight: 300;
+  text-align: center; }
+
+.reveal .icon-list .icon {
+  width: 50px;
+  height: 50px;
+  display: block;
+  background: rgba(255, 255, 255, 0.5);
+  border: 5px solid white;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+  margin-left: auto;
+  margin-right: auto; }
+
+.reveal .icon-list a {
+  font-size: 0.5em;
+  font-weight: 700; }
+
+.reveal .icon-list .icon-attrib {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 80px;
+  font-size: 0.4em;
+  line-height: 1.2em; }
+
+  .reveal img.thumb-attrib {
+  vertical-align: -30%;
+  border: 5px solid white;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
+  margin-left: 0.2em;
+  margin-right: 0.3em;
+  margin-top: 0em; }
+
+/***
+ * Toggle
+ */
+
+ input[type="checkbox"] {
+    background-image: -webkit-linear-gradient(hsla(0,0%,0%,.1), hsla(0,0%,100%,.1)),
+                      -webkit-linear-gradient(left, #dc322f 50%, #859900 50%);
+    background-size: 100% 100%, 200% 100%;
+    background-position: 0 0, 15px 0;
+    border-radius: 25px;
+    box-shadow: inset 0 1px 4px hsla(0,0%,0%,.5),
+                inset 0 0 10px hsla(0,0%,0%,.5),
+                0 0 0 1px hsla(0,0%,0%,.1),
+                0 -1px 2px 2px hsla(0,0%,0%,.25),
+                0 2px 2px 2px hsla(0,0%,100%,.75);
+    cursor: pointer;
+    height: 35px;
+    left: 50%;
+    margin: -12px -37px;
+    padding-right: 25px;
+    top: 50%;
+    width: 110px;
+    -webkit-appearance: none;
+    -webkit-transition: .25s;
+}
+input[type="checkbox"]:after {
+    background-color: #eee;
+    background-image2: -webkit-linear-gradient(hsla(0,0%,100%,.1), hsla(0,0%,0%,.1));
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,237,191,1) 0%,rgba(208, 191, 163,1) 100%);
+    border-radius: 25px;
+    box-shadow: inset 0 1px 1px 1px hsla(0,0%,100%,1),
+                inset 0 -1px 1px 1px hsla(0,0%,0%,.25),
+                0 1px 3px 1px hsla(0,0%,0%,.5),
+                0 0 2px hsla(0,0%,0%,.25);
+    content: attr(data_text);
+    font-size: 20px;
+    font-weight: bold;
+    display: block;
+    height: 35px;
+    left: 0;
+    top: 0;
+    width: 90px;
+    text-align: center;
+    line-height: 1.7em;
+}
+
+input[type="checkbox"]:checked {
+    background-position: 0 0, 30px 0;
+    padding-left: 20px;
+    padding-right: 0;
+}
+
+/***
+ * Radio
+ */
+
+ input[type="radio"] {
+    background-image: -webkit-linear-gradient(hsla(0,0%,0%,.1), hsla(0,0%,100%,.1)),
+                      -webkit-linear-gradient(left, #859900 50%, #dc322f 50%);
+    background-size: 100% 100%, 200% 100%;
+    background-position: 0 0, 30px 0;
+    padding-left: 20px;
+    border-radius: 25px;
+    box-shadow: inset 0 1px 4px hsla(0,0%,0%,.5),
+                inset 0 0 10px hsla(0,0%,0%,.5),
+                0 0 0 1px hsla(0,0%,0%,.1),
+                0 -1px 2px 2px hsla(0,0%,0%,.25),
+                0 2px 2px 2px hsla(0,0%,100%,.75);
+    cursor: pointer;
+    height: 35px;
+    left: 50%;
+    margin: -12px -37px;
+    padding-right: 25px;
+    top: 50%;
+    width: 130px;
+    -webkit-appearance: none;
+    -webkit-transition: .25s;
+}
+
+input[type="radio"]:after {
+    background-color: #eee;
+    background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,237,191,1) 0%,rgba(208, 191, 163,1) 100%);
+    border-radius: 25px;
+    box-shadow: inset 0 1px 1px 1px hsla(0,0%,100%,1),
+                inset 0 -1px 1px 1px hsla(0,0%,0%,.25),
+                0 1px 3px 1px hsla(0,0%,0%,.5),
+                0 0 2px hsla(0,0%,0%,.25);
+    content: attr(data_text);
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    height: 35px;
+    left: 0;
+    top: 0;
+    width: 110px;
+    text-align: center;
+    line-height: 2.0em;
+}
+
+input[type="radio"]:hover {
+    background-position: 0 0, 17px 0;
+    color: #002b36;
+}
+
+input[type="radio"].smaller {
+    width: 80px;
+}
+
+input[type="radio"].smaller:after {
+    width: 60px;
+}
+
+input[type="radio"].small {
+    width: 100px;
+}
+
+input[type="radio"].small:after {
+    width: 80px;
+}
+
+input[type="radio"]:checked {
+    background-position: -50% 0, 0 0;
+    padding-right: 0;
+    cursor: default;
+    color: #002b36;
+}
+
+input[type="radio"].smaller:checked {
+    background-position: 0 0, 60px 0;
+}
+
+.radio_panel {
+    display: inline-block;
+}
+
+.radio_panel input {
+        margin-left: 60px;
+        margin-top: 30px;
+        float: left;
+}
+
+.radio_panel input.smaller  {
+    margin-left: 50px;
+}
+
+.bigfont input[type="radio"] {
+   width: 130px;
+}
+
+.bigfont input[type="radio"]:after {
+   font-size: 20px; 
+   line-height: 1.7em;
+    width: 110px;
+}
+
+/***
+ * Range
+ */
+ input[type="range"] {
+    background-image2: -webkit-linear-gradient(hsla(0,0%,0%,.1), hsla(0,0%,100%,.1)),
+                      -webkit-linear-gradient(left, #859900 50%, #dc322f 50%);
+    background-size2: 100% 100%, 200% 100%;
+    background-color: rgba(46, 13, 35,0.2);
+    -webkit-appearance: none;   /* Remove Safari default */
+    outline: none;
+    width: 350px;
+    height: 10px;
+    border-radius: 25px;
+    box-shadow: inset 0 1px 4px hsla(0,0%,0%,.5),
+                inset 0 0 10px hsla(0,0%,0%,.5),
+                0 0 0 1px hsla(0,0%,0%,.1),
+                0 -1px 2px 2px hsla(0,0%,0%,.25),
+                0 2px 2px 2px hsla(0,0%,100%,.75);
+    box-shadow2: 0 0 5px 6px rgba(255,237,191,0.5);
+    cursor: ew-resize;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;   /* Remove Safari default */
+    background-color: rgba(181, 137, 0, 0.5);
+    border-radius: 25px;
+    box-shadow: inset 0 1px 1px 1px hsla(0,0%,100%,1),
+                inset 0 -1px 1px 1px hsla(0,0%,0%,.25),
+                0 1px 3px 1px hsla(0,0%,0%,.5),
+                0 0 2px hsla(0,0%,0%,.25);
+    content: attr(data_text);
+    display: block;
+    height: 25px;
+    left: 0;
+    top: 0;
+    width: 25px;
+     -webkit-transition: background .25s;
+}
+
+input[type="range"]::-webkit-slider-thumb:active, input[type="range"]::-webkit-slider-thumb:hover {
+    background-color: rgb(181, 137, 0);
+    background2: -webkit-radial-gradient(center, ellipse cover,  rgba(181, 137, 0, 1.0) 0%,rgba(181, 137, 0, 0.8) 100%);
+}

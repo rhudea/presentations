@@ -1,0 +1,769 @@
+<!doctype html>  
+<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Cinematics for the Web</title>
+
+		<meta name="description" content="Bringing Cinematics to the Web with CSS Filters">
+		<meta name="author" content="Raul Hudea">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		
+		<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet' type='text/css'>
+		
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/main.css">
+		<link rel="stylesheet" href="css/slomo.css">
+		<link rel="stylesheet" href="css/custom.css">
+		<link rel="stylesheet" href="css/umbrui.css">
+		<link rel="stylesheet" href="css/print.css" type="text/css" media="print">
+
+		<!-- Solarized light code highlight theme -->
+		<link rel="stylesheet" href="lib/solarized_light.css">
+	</head>
+	
+	<body>
+		
+		<div class="reveal">
+
+			<!-- Used to fade in a background when a specific slide state is reached -->
+			<div class="state-background"></div>
+			
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+				<h2>About this presentation</h2>
+				<div class="about">
+					<p>This presentation was given at the <b><a href="http://www.webvisionsevent.com/barcelona/">WebVisions</a></b> conference held in Barcelona, Spain on Saturday, July 7th. The slides are supporting the presentation, and do not have enough textual information to be understood by themselves.</p>
+
+					<p>At the time it was created, the presentation required a prototype build of the Chromium browser to view the prototype features it uses. You can get the prototype implementation on <b><a href="http://github.com/adobe/webkit/downloads">github.com/adobe/webkit/downloads</a></b>.</p>
+
+					<p>You can navigate with the <b>left</b> and <b>right</b> arrow keys and with the <b>up/down</b> keys to drill into sections.</p>
+				</div>
+				</section>
+				<section>
+					<h1 style="carved; margin-top: 150px">Cinematics for the Web</h1>
+					<script>
+						// Delicously hacky. Look away.
+						if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );
+					</script>
+				</section>
+				<section>
+					<h2 id="agenda">HI !</h2>
+					<div id="agenda_parent">
+						<div id="outside">
+							<div id="bio" style="position: relative; height: auto">
+								<h2> </h2>
+								<br/>
+								<p class="name">Raul Hudea</p>
+								<p class="position">Computer Scientist</p>
+								<p class="team">Web Platform</p>
+								<div class="filler" style="height: 300px; width: 250px;">
+									<br/>
+								</div>
+								<div>
+									<img class="photo" width="150" height="150" src="assets/images/RaulHeadShot.jpg">
+									<br/>
+									<ul class="bio_info" style="margin-top: 20px; margin-left: 30px">
+										<li><a href="http://twitter.com/rhudea">@rhudea</a></li>
+										<li><a href="http://html.adobe.com">http://html.adobe.com</a></li>
+										<li><a href="http://blogs.adobe.com/webplatform">http://blogs.adobe.com/webplatform</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div id="inside" class="inside_shader">
+								<iframe width="320" height="612" seamless src="http://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html" style="margin-right: 80px"></iframe>
+								<iframe width="320" height="612" seamless src="http://dvcs.w3.org/hg/FXTF/rawfile/tip/compositing/index.html" style="margin-left: 80px"></iframe>
+								<!--img width="320" height="412" src="assets/images/filter-spec.png" >
+								<img width="320" height="412" src="assets/images/blending-spec.png" -->
+						</div>
+					</div>
+					<a id="flip-add-shader" class="fragment"></a>
+					<a id="flip-page" class="fragment"></a>
+				</section>
+				
+				<!-- CSS Filters -->
+
+				<section>
+					<section>
+							<h2>CSS Filters</h2>
+							<iframe seamless src="assets/svg/noun_project_1435.svg" width="600" height="400"></iframe>
+						</section>
+					<section>
+						<h2>CSS Filters</h2>
+						<ul>
+							<li class="fragment">Ways of changing the rendering of HTML5 content</li>
+							<li class="fragment"><b>ANY</b> content, not just images (beat that, canvas!)</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Shorthand Filters</h2>
+						<pre><code>#myelement {
+	filter: shorthand-function(params);
+}</code></pre>
+						<div class="frame">
+							<ul class="polaroids">
+								<li title="original"><div></div></li>
+								<li title="grayscale(1.0)"><div class="filtered"></div></li>
+								<li title="sepia(0.8)"><div class="filtered"></div></li>
+								<li title="invert(0.8)"><div class="filtered"></div></li>
+								<li title="saturate(0.5)"><div class="filtered"></div></li>
+								<li title="brightness(0.5)"><div class="filtered brightness-special"></div></li>
+								<li title="opacity(0.5)"><div class="filtered"></div></li>
+								<li title="blur(5px)"><div class="filtered"></div></li>
+								<li title="contrast(0.5)"><div class="filtered"></div></li>
+								<li title="hue-rotate(90deg)"><div class="filtered"></div></li>
+							</ul>
+						</div>
+						<p id="add-filters" class="fragment"></p>
+					</section>
+					<section>
+						<h2>Shorthand Filters</h2>
+						<ul>
+							<li class="fragment">cover most common needs (ex: galleries)</li>
+							<li class="fragment">can be applied to any HTML5 content</li>
+							<li class="fragment">hardware accelerated (<b>on most browsers</b>)</li>
+							
+						</ul>
+					</section>
+					<section>
+						<h2>SVG Filters</h2>
+						<pre><code>#myelement {
+	filter: url(#svg-filter-id);
+}</code></pre>	
+						<div style="margin: auto">
+							<input type="range" value="0" onchange="updateLight(this.value)"/>
+						<iframe  id="emboss" src="assets/svg/filters.svg" width="600" heigh="400"></iframe>
+                        						</div>
+					</section>
+					<script>
+						function updateLight(value) {
+							var frame = document.getElementById('emboss').contentWindow; 
+							var svgDoc = frame.document;
+							var light = svgDoc.getElementById('light');
+							light.setAttribute("x", value * 10 - 200);
+						}
+					</script>
+					<section>
+						<h2>SVG Filters</h2>
+						<ul style="width: 75%">
+							<li class="fragment">(<b>currently</b>) no parameters passing</li>
+							<li class="fragment">applies only to SVG content (Firefox, WebKit nightly)</li>
+							<li class="fragment">created as graph of filters primitives(see <a href="https://dvcs.w3.org/hg/FXTF/raw-file/tip/filters/index.html">spec</a> for more details)</li>
+							
+						</ul>
+					</section>
+					<section>
+						<h2>SVG Filter graph</h2>
+						<pre><code style="font-size:20px" >&lt;filter id='Emboss' filterUnits='objectBoundingBox' &gt;
+  &lt;feColorMatrix result='pict0' in='SourceGraphic' 
+                 type='luminanceToAlpha'/&gt;
+  &lt;feSpecularLighting result='pict1' in='pict0' 
+                      lighting-color='white' 
+                      specularConstant='1' 
+                      specularExponent='16' surfaceScale='6'&gt;
+    &lt;fePointLight x='-200' y='100' z='380' 
+                  id=&quot;light&quot;/&gt;
+  &lt;/feSpecularLighting&gt;
+  &lt;feComposite in2='pict1' in='SourceGraphic' 
+               operator='out' k1='3.3' k2='0.2' k3='0.1' k4='0'/&gt;
+&lt;/filter&gt;
+</code></pre>
+					</section>
+				</section>
+
+				<!-- CSS Shaders -->
+				<section>
+					<section>
+							<h2>CSS Shaders</h2>
+							<iframe seamless src="assets/svg/noun_project_1139.svg" width="600" height="400"></iframe>
+						</section>
+						<section>
+							<h2>CSS Shaders</h2>
+						<pre><code>#myelement {
+	filter: custom(params)
+}</code></pre>
+						<!--iframe src="assets/svg/HTML5_logo.svg" width="400" heigh="300"></iframe-->
+					</section>
+					<section>
+						<h2>Shader Syntax</h3>
+						<pre id="shaders-syntax"><code id="syntax-code" class="html">
+#myelement {
+	filter: custom(
+	               
+	               
+	                         );
+}
+</code></pre>
+<div id="show-empty-code" style="display:none" class="hidden-vertex-code">
+#myelement {
+	filter: custom(
+	               
+	               
+	                         );
+}
+</div>
+<div id="show-vertex-code" style="display:none" class="hidden-fragment-code">
+#myelement {
+	filter: custom(	<span style="color:#cb4b16; font-weight: bold">vertex-shader</span>
+	               
+	               
+	                         );
+}
+</div>
+<div id="show-fragment-code" style="display:none" class="hidden-mesh-code">
+#myelement {
+	filter: custom(	<span <span style="color:#cb4b16; font-weight: bold">vertex-shader</span>
+	                <span style="color:#cb4b16; font-weight: bold">[ fragment-shader]</span>
+	               
+	                         );
+}
+</div>
+<div id="show-mesh-code" style="display:none" class="hidden-params-code">
+#myelement {
+	filter: custom(	<span <span style="color:#cb4b16; font-weight: bold">vertex-shader</span>
+	                <span style="color:#cb4b16; font-weight: bold">[ fragment-shader]</span>
+	                <span style="color:#cb4b16; font-weight: bold">[,vertex-mesh]</span>
+	                         );
+}
+</div>
+<div id="show-params-code" style="display:none">
+#myelement {
+	filter: custom(	<span <span style="color:#cb4b16; font-weight: bold">vertex-shader</span>
+	                <span style="color:#cb4b16; font-weight: bold">[ fragment-shader]</span>
+	                <span style="color:#cb4b16; font-weight: bold">[,vertex-mesh]</span>
+	                <span style="color:#cb4b16; font-weight: bold">[,params]</span>);
+}
+</div>
+						<p id="vertex-code" class="fragment"></p>
+						<p id="fragment-code" class="fragment"></p>
+						<p id="mesh-code" class="fragment"></p>
+						<p id="params-code" class="fragment"></p>
+					</section>
+					<section>
+						<h2>Vertex shader</h2>
+						<pre><code>
+#myelement {
+	filter: custom( <span style="color:#cb4b16; font-weight: bold">url(vertex.vs)
+	                <span style="color:#cb4b16; font-weight: bold">,4 4</span>);
+}
+</code></pre>
+					<div id="container">
+						<div id="vertex-shader" class="shader-grid shader_container" style="float:left">
+							<div class="shader-box">
+								<h1>CSS Shaders</h1>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,  sed do eiusmod tempor incididunt ut labore.</p>
+							</div>
+						</div>
+						<div id="vertex-info" style="float:right" class="stitched shader-info">
+							<ul>
+								<li id="vertex-mesh" class="fragment insetText">operates on mesh of vertices</li>
+								<li id="vertex-geom" class="fragment insetText">alters the 3D Geometry</li>
+							</ul>
+						</div>
+					</div>
+					</section>
+
+
+					<section>
+						<h2>Fragment shader</h2>
+						<pre><code>
+#myelement {
+	filter: custom(	url(vertex.vs)
+	                <span style="color:#cb4b16; font-weight: bold">url(fragment.fs)</span>
+	                ,4 4);
+}
+</code></pre>
+					<div id="fragment-container">
+						<div id="fragment-shader" class="shader-grid grid-bg wobble shader_container" style="float:left">
+							<div class="shader-box">
+								<h1>CSS Shaders</h1>
+								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,  sed do eiusmod tempor incididunt ut labore.</p>
+							</div>
+						</div>
+						<div id="vertex-info" style="float:right" class="stitched shader-info">
+							<ul>
+								<li id="fragment-color" class="fragment insetText">decides the pixel color</li>
+								<li id="fragment-interpolated" class="fragment insetText">receives interpolated data from vertex</li>
+							</ul>
+						</div>
+					</div>
+					</section>
+
+
+					<section>
+						<h2>Passing arguments</h2>
+						<pre><code>
+#myelement {
+	filter: custom(	url(vertex.vs)
+	                url(fragment.fs)
+	                ,4 4
+			<span style="color:#cb4b16; font-weight: bold" id="amountValue">,amount(0.5)</span>);
+}
+</code></pre>
+					<div id="container-argument">
+							<div id="argument-shader" class="shader-grid grid-bg wobble-color shader_container" style="float:left">
+								<div class="shader-box">
+									<h1>CSS Shaders</h1>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,  sed do eiusmod tempor incididunt ut labore.</p>
+								</div>
+							</div>
+						<div id="vertex-info" style="float:right; margin-right: 5em" class="stitched shader-info">
+							<div style="margin: 10px">
+								<input type="range" value="0" onchange="updateAmount(this.value)" min="0" value="0.5" step="0.01" max="1.0"/>
+							</div>
+							<ul>
+								<li class="insetText">move the slider</li>
+							</ul>
+						</div>
+					</div>
+					<script>
+						function updateAmount(value) {
+							var val = parseFloat(value).toFixed(2);
+							var argShader = document.getElementById('argument-shader'); 
+							var filter = "custom(url(assets/shaders/wobble.vs) url(assets/shaders/color-swipe.fs), 40 40 content-box, amplitude 60, amount " + val + ", angle 20)";
+							argShader.style.webkitFilter = filter;
+							var amountValue = document.getElementById('amountValue');
+							amountValue.innerHTML = ",amount(" + val + ")";
+						}
+					</script>
+					</section>
+					<section>
+						<h2>CSS Shaders</h2>
+						<ul>
+							<li class="fragment">easy to use</li>
+							<li class="fragment">hardware accelerated</li>
+							<li class="fragment">pixel and geometry manipulation</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Shader code</h2>
+						<iframe seamless src="assets/svg/noun_project_1171.svg" width="600" height="400"></iframe>
+					</section>
+					<section>
+						<h2>Vertex code</h2>
+						<pre><code>precision mediump float;
+// vertex attributes
+attribute vec4 a_position;
+attribute vec2 a_texCoord;
+// shader uniform
+uniform mat4 u_projectionMatrix;
+//
+varying vec2 v_texCoord;
+uniform mat4 txf;
+... const defines (PI, PHI) ...
+void main() {    
+    v_texCoord = a_texCoord;
+    vec4 pos = a_position;
+    pos.z = 40.0 * cos(pos.x * PI * 2.0 + PHI);
+    gl_Position = u_projectionMatrix * txf * pos;
+}
+</code></pre>
+					</section>
+					<section>
+						<h2>Fragment code</h2>
+						<pre><code>precision mediump float;
+// These uniform values are passed in using CSS.
+uniform float frontColor;
+uniform float backColor;
+// This varying value is passed from vertex shader.
+varying float shadow;
+
+void main()
+{
+    // Use gl_FrontFacing to hide the back face.
+    float c = gl_FrontFacing ? frontColor : backColor;
+    float a =  shadow * c;
+
+    css_BlendColor = vec4(a, a, a, c);
+}
+						</code></pre>
+					</section>
+								</section>
+								<section>
+					<section>
+						<h2>CSS Shaders Security</h2>
+						<iframe seamless src="assets/svg/noun_project_2457.svg" width="500" height="300" style="margin-top: 50px;"></iframe>
+					</section>
+					<section>
+						<h2>Threats</h2>
+						<ul>
+							<li class="fragment">access to rendered content</li>
+							<li class="fragment">access to third-party content (bank info)</li>
+							<li class="fragment">user agent data (like visited links)</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Timing attacks</h2>
+						<ul style="width: 75%">
+							<li class="fragment">read pixel value</li>
+							<li class="fragment">depending on pixel value, spend more or less time in shader</li>
+							<li class="fragment">time the shader execution</li>
+							<li class="fragment">infer data</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Timing attacks</h2>
+						<ul>
+							<li class="fragment">demonstrated in WebGL</li>
+							<li class="fragment">demonstrated in our prototype</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Current fix</h2>
+						<ul>
+							<li class="fragment">rewrite shader to eliminate color based decisions</li>
+							<li class="fragment">analyze GPU execution patterns</li>
+						</ul>						
+					</section>
+				</section>
+					<section>
+						<h2>CSS Shaders Studio</h2>
+							<img  src="assets/images/css_shaders_studio.png"></img>
+					</section>
+
+
+				<!-- CSS Compositing & Blending -->
+
+				<section>
+					<section>
+						<h2>CSS Compositing & Blending</h2>
+						<ul style="width: 75%">
+							<li class="fragment">A very common idiom for designers. They currently have to use prerendered images</li>
+							<li class="fragment">Easy to describe with simple keywords</li>
+							<li class="fragment">Easy to implement by browser vendors</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Alpha Compositing</h2>
+						<pre><code>#myelement {
+	<span style="color:#cb4b16; font-weight: bold">alpha-compositing</span>: <span style="color:#cb4b16; font-weight: bold" id="alphaValue">value</span>;
+}
+</code></pre>							
+							<div id="alpha_wrapper" class="isolate">
+								<img src="assets/images/michou_flower.jpeg"/>
+								<div id="alpha-src"  class="pacman" style="-webkit-alpha-compositing: src-over"></div>
+							</div>
+							<div class="radio_panel  bigfont">
+								<input type="radio" name="alpha" data_text="clear" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="src" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="dst" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="src-over" checked onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="src-in" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="dst-in" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="src-out" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="dst-out" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="src-atop" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="dst-atop" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="xor" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+								<input type="radio" name="alpha" data_text="plus" onchange="changeAlpha(this.attributes['data_text'].value)"/>
+							</div>
+							<script>
+								var alphaImg = document.getElementById("alpha-src");
+								function changeAlpha(value) {
+									var alphaValue = document.getElementById("alphaValue");
+									alphaImg.style.webkitAlphaCompositing = value;
+									alphaValue.innerHTML = value;
+								}
+							</script>
+					</section>
+					<section>
+						<h2>CSS Blending</h2>
+						<pre><code>#myelement {
+	<span style="color:#cb4b16; font-weight: bold">blend-mode</span>: <span style="color:#cb4b16; font-weight: bold" id="blendValue">value</span>;
+}
+</code></pre>							
+							<div id="alpha_wrapper">
+								<img src="assets/images/michou_flower.jpeg"/>
+								<div id="blend-src" style="-webkit-blend-mode: normal"></div>
+							</div>
+							<div class="radio_panel">
+								<input type="radio" name="blend" data_text="normal" checked onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="multiply" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="overlay"  onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="saturation" onchange="changeBlend(this.attributes['data_text'].value)"/>	
+								<input type="radio" name="blend" data_text="lighten" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="color-dodge" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="color-burn" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="hard-light" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="soft-light" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="difference" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="exclusion" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" class="small" data_text="darken" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" class="smaller" data_text="hue" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" class="small" data_text="screen" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" class="small" data_text="color" onchange="changeBlend(this.attributes['data_text'].value)"/>
+								<input type="radio" name="blend" data_text="luminosity" onchange="changeBlend(this.attributes['data_text'].value)"/>					
+							</div>
+							<script>
+								var blendImg = document.getElementById("blend-src");
+								function changeBlend(value) {
+									var blendValue = document.getElementById("blendValue");
+									blendImg.style.webkitBlendMode = value;
+									blendValue.innerHTML = value;
+								}
+							</script>
+					</section>
+					<section>
+						<h2>Mixing Blending and Filters</h2>
+						<h3>soft-glow effect</h3>
+						<div>
+							<div style="margin:auto; position:relative;float:left">
+								<div class="image composite">
+									<img id="img_stack" src="assets/images/michou_flower.jpeg"/>
+									<img id="composite_img" src="assets/images/michou_flower.jpeg"/>
+								</div>
+							</div>
+							<div style="float:right; padding-right: 100px;">
+								<ul style="list-style:none; margin-top: 20px">
+									<li style="margin-top: 20px"><input type="checkbox" data_text="Blur" onchange="changeFilter(this.checked)"/></li>
+									<li style="margin-top: 0.8em"><input type="checkbox" data_text="Blend" onchange="changeBlending(this.checked)"/> </li>
+								</ul>
+							</div>
+						</div>
+						<script>
+							var compositeImg = document.getElementById("composite_img");
+							function changeFilter(isChecked) {
+								var filter = isChecked ? "blur(3px)" : "none";
+								compositeImg.style.webkitFilter = filter;
+							}
+							function changeBlending(isChecked) {
+								var blend = isChecked ? "lighten" : "normal";
+								compositeImg.style.webkitBlendMode = blend;
+							}
+						</script>
+					</section>
+				</section>
+				<section>
+					<h2>Current status</h2>
+					<ul>
+						<li class="fragment">CSS Filters available in Chrome 18+</li>
+						<li class="fragment">CSS Shaders - work in progress</li>
+						<li class="fragment">CSS Blending & Compositing - work in progress</li>
+					</ul>
+				</section>
+				<section>
+					<section>
+                            <h2>attributions 1/3</h2>
+                        
+                            <ul>
+                                <li>Slide tool <a href="http://lab.hakim.se/reveal-js/#/">Reveal.js</a> by <a href="http://hakim.se/">Hakim El Hatab</a></li>
+                                <li><p>Icons from the <a href="http://thenounproject.com/">Noun project</a></p>
+                                    <ul class="icon-list">                                    
+                                        <li><img class="icon" src="assets/svg/noun_project_1435.svg" /><a href="http://thenounproject.com/noun/paint-palette/#icon-No1435">paint palette</a><span class="icon-attrib">Okan Benn, from The Noun Project</span></li>
+                                    
+                                        <li><img class="icon" src="assets/svg/noun_project_1139.svg" /><a href="http://thenounproject.com/noun/pyramids/#icon-No1139">pyramids</a><span class="icon-attrib">majd elsherif, from The Noun Project</span></li>  
+
+                                        <li><img class="icon" src="assets/svg/noun_project_2457.svg" /><a href="http://thenounproject.com/noun/security-camera/#icon-No2457">security</a><span class="icon-attrib">The Noun Project</span></li> 
+
+                                        <li><img class="icon" src="assets/svg/noun_project_1171.svg" /><a href="http://thenounproject.com/noun/source-code/#icon-No1171">source code</a><span class="icon-attrib">The Noun Project</span></li>                               
+                                    </ul>
+                                </li>
+                            </ul>
+					</section>
+					<section>
+						<h2>attributions 2/3</h2>
+						<ul>
+                                <li><p>Image <img class="thumb-attrib" src="assets/images/michou_flower.jpeg" height="75" /> with permission from <a href="http://www.flickr.com/photos/mi-chou/4164188340/">miChou</a></li>
+                                <li><p>Image <img class="thumb-attrib" src="assets/images/bridge.jpg" height="75" /> from personal collection</a></li>
+					</section>
+					<section>
+						<h2>attributions 3/3</h2>
+                            <ul>
+                                <li><p>Fonts</p>
+                                    <ul>
+                                        <li><a href="http://www.google.com/webfonts" style="font-family:'Lato'">Lato</a> (Google Fonts). 
+                                        <li><a href="http://www.google.com/webfonts" style="font-family:'Ubuntu Mono'">Ubuntu Mono</a> (Google Fonts). 
+                                    </ul>
+                                </li>
+                            </ul>					
+					</section>
+				</section>
+				<section>
+					<h1 style="margin-bottom: 1em">Thank you!</h1>
+					<a style="font-size:2em; font-weight: bold" href="http://html.adobe.com">html.adobe.com</a>
+				</section>
+
+			</div>
+
+			<!-- The navigational controls UI -->
+			<aside class="controls">
+				<a class="left" href="#">&#x25C4;</a>
+				<a class="right" href="#">&#x25BA;</a>
+				<a class="up" href="#">&#x25B2;</a>
+				<a class="down" href="#">&#x25BC;</a>
+			</aside>
+
+			<!-- Displays presentation progress, max value changes via JS to reflect # of slides -->
+			<div class="progress"><span></span></div>
+			
+		</div>
+
+		<!-- Optional libraries for code syntax highlighting and classList support in IE9 -->
+		<script src="lib/highlight.js"></script>
+		<script src="lib/classList.js"></script>
+		
+		<script src="js/reveal.js"></script>
+		
+		<script>
+			// Parse the query string into a key/value object
+			var query = {};
+			location.search.replace( /[A-Z0-9]+?=(\w*)/gi, function(a) {
+				query[ a.split( '=' ).shift() ] = a.split( '=' ).pop();
+			} );
+
+			// Fires when a slide with data-state=customevent is activated
+			Reveal.addEventListener( 'customevent', function() {
+				alert( '"customevent" has fired' );
+			} );
+
+			// Fires each time a new slide is activated
+			Reveal.addEventListener( 'slidechanged', function( event ) {
+				// event.previousSlide, event.currentSlide, event.indexh, event.indexv
+			} );
+
+			Reveal.addEventListener( 'fragmenthidden', function( event ) {
+				console.log("HIDDEN", event.fragment.id);
+    			// event.fragment = the fragment DOM element
+    			switch (event.fragment.id) {
+     			case "flip-add-shader": 
+ 					var outside = document.getElementById("outside");
+    				outside.classList.remove("outside_shader");      			
+    				break;
+
+				case "flip-page":
+     				var agenda = document.getElementById("agenda_parent");
+    				agenda.classList.remove("flip-page");
+    				var ag = document.getElementById("agenda");
+    				ag.innerHTML = "HI !"; 
+    				break;
+
+    			case "add-filters":
+    				var filters = ["grayscale", "sepia", "invert", "saturate", "brightness", "opacity", "blur", "contrast", "hue-rotate"];
+    				var filtered = document.querySelectorAll(".filtered");
+    				var len = filters.length > filtered.length ? filtered.length : filters.length;
+    				for (var i = 0; i < len; i++) {
+    					filtered[i].classList.remove(filters[i]);
+    					filtered[i].classList.add(filters[i] + "-special");
+    				}
+    				var polaroids = document.querySelectorAll("ul.polaroids li");
+    				for (var i = 0; i < polaroids.length; i++)
+    					polaroids[i].classList.remove("show-text");
+	    			break;
+
+				case "vertex-code":
+				case "fragment-code":
+				case "mesh-code":
+				case "params-code":
+					var shaderCode = document.getElementById("syntax-code");
+					var newCode = document.getElementsByClassName( "hidden-" + event.fragment.id)[0];
+					shaderCode.innerHTML = newCode.innerHTML;
+					var shaderSyntax = document.getElementById("shaders-syntax");
+					hljs.highlightBlock(shaderSyntax);
+					break;
+				case "vertex-mesh":
+					var shaderGrid = document.getElementById("vertex-shader");
+					shaderGrid.classList.remove("grid-bg");
+					break;
+				case "vertex-geom":
+					var shaderGrid = document.getElementById("vertex-shader");
+					shaderGrid.classList.remove("wobble");
+					break;
+				case "fragment-color":
+					var fragColor = document.getElementById("fragment-shader");
+					fragColor.classList.remove("wobble-color");
+					fragColor.classList.add("wobble");
+				}
+
+			} );
+
+			Reveal.addEventListener( 'fragmentshown', function( event ) {
+				console.log("SHOWN", event.fragment.id);
+    			// event.fragment = the fragment DOM element
+    			switch (event.fragment.id) {
+    			case "flip-add-shader": 
+ 					var outside = document.getElementById("outside");
+    				outside.classList.add("outside_shader");
+    				break;
+
+				case "flip-page": // used by book page shader
+				    var agenda = document.getElementById("agenda_parent");
+    				agenda.classList.add("flip-page");
+    				var ag = document.getElementById("agenda");
+    				ag.innerHTML = "AGENDA"; 
+					break;
+
+				case "add-filters": // used at shorthand filters
+    				var filters = ["grayscale", "sepia", "invert", "saturate", "brightness", "opacity", "blur", "contrast", "hue-rotate"];
+    				var filtered = document.querySelectorAll(".filtered");
+    				var len = filters.length > filtered.length ? filtered.length : filters.length;
+    				for (var i = 0; i < len; i++) {
+    					filtered[i].classList.remove(filters[i] + "-special");
+    					filtered[i].classList.add(filters[i]);
+    				}
+    				var polaroids = document.querySelectorAll("ul.polaroids li");
+    				for (var i = 0; i < polaroids.length; i++)
+    					polaroids[i].classList.add("show-text");
+					break;
+
+				case "vertex-code":
+				case "fragment-code":
+				case "mesh-code":
+				case "params-code":
+					var shaderCode = document.getElementById("syntax-code");
+					var newCode = document.getElementById("show-" + event.fragment.id);
+					shaderCode.innerHTML = newCode.innerHTML;
+					var shaderSyntax = document.getElementById("shaders-syntax");
+					hljs.highlightBlock(shaderSyntax);
+					break;
+				case "vertex-mesh":
+					var shaderGrid = document.getElementById("vertex-shader");
+					shaderGrid.classList.add("grid-bg");
+					break;
+				case "vertex-geom":
+					var shaderGrid = document.getElementById("vertex-shader");
+					shaderGrid.classList.add("wobble");
+					break;
+				case "fragment-color":
+					var fragColor = document.getElementById("fragment-shader");
+					fragColor.classList.remove("wobble");
+					fragColor.classList.add("wobble-color");
+    			}
+			} );
+
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+				controls: true,
+
+				// Display a presentation progress bar
+				progress: true,
+
+				// If true; each slide will be pushed to the browser history
+				history: true,
+
+				// Loops the presentation, defaults to false
+				loop: false,
+
+				// Flags if mouse wheel navigation should be enabled
+				mouseWheel: true,
+
+				// Apply a 3D roll to links on hover
+				rollingLinks: false,
+
+				// UI style
+				theme: 'slomo', // default/neon
+
+				// Transition style
+				transition: query.transition || 'default' // default/cube/page/concave/linear(2d)
+			});
+
+			hljs.initHighlightingOnLoad();
+		</script>
+
+	</body>
+</html>
